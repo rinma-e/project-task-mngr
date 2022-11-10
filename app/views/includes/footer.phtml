@@ -1,0 +1,56 @@
+    <footer class="page-footer">
+    	<p class="mb-0">Copyright © <?= date('Y') ?>. All right reserved.</p>
+    </footer>
+    </div>
+    <!--end wrapper-->
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <!-- <script src="<?= ASSETS ?>plugins/bootstrap_bundle/js/bootstrap.bundle.min.js"></script> -->
+    <!--plugins-->
+    <script src="<?= ASSETS ?>js/jquery.min.js"></script>
+    <?php if (isset($_SESSION['user_id'])) : ?>
+    	<script src="<?= ASSETS ?>plugins/simplebar/js/simplebar.min.js"></script>
+    	<?php if (isset($_SESSION['space_ids'])) : ?>
+    		<script>
+    			var user_id = <?= $_SESSION['user_id'] ?>;
+    			//* $_SESSION['space_ids'] as comma delimited string
+    			//TODO: $_SESSION['space_ids'] as array
+    			var space_ids = <?= json_encode($_SESSION['space_ids']) ?>;
+    			var page_title = '<?= $data['page_title'] ?>';
+    		</script>
+
+    		<script src="<?= ASSETS ?>plugins/rrule/rrule.min.js"></script>
+    		<script src="<?= ASSETS ?>plugins/rrule/luxon.min.js"></script>
+    		<script src="<?= ASSETS ?>plugins/fullcalendar/js/main.min.js"></script>
+    		<script src="<?= ASSETS ?>plugins/bootstrap-material-datetimepicker/js/moment.min.js"></script>
+    		<script src="<?= ASSETS ?>plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.min.js"></script>
+    		<script src="<?= ASSETS ?>plugins/bootstrap-multiselect/dist/js/bootstrap-multiselect.min.js"></script>
+    		<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/rrule@5.5.0/main.global.min.js'></script>
+    		<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+    		<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+    		<script src="<?= ASSETS ?>plugins/hierarchy-select-2/js/hierarchy-select.js"></script>
+
+
+    		<script src="<?= ASSETS ?>js/calendar_tasks_V3.js"></script>
+    		<script src="<?= ASSETS ?>js/rrule_form.js"></script>
+    		<script src="<?= ASSETS ?>js/task_form.js"></script>
+    	<?php endif ?>
+
+    	<script src="<?= ASSETS ?>plugins/metismenu/js/metisMenu.min.js"></script>
+    	<script src="<?= ASSETS ?>plugins/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.min.js"></script>
+    	<script src="<?= ASSETS ?>plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+    	<script src="<?= ASSETS ?>plugins/jquery-knob/jquery.knob.js"></script>
+    	<script src="<?= ASSETS ?>plugins/notifications/js/lobibox.min.js"></script>
+
+    	<!--app JS-->
+    	<script src="<?= ASSETS ?>js/sidebar_menu.js"></script>
+
+    	<script>
+    		$(function() {
+    			$(".knob").knob();
+    		});
+    	</script>
+    <?php endif ?>
+    </body>
+
+    </html>

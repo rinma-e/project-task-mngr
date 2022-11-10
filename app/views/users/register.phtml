@@ -1,0 +1,124 @@
+<?php $this->loadView("includes/html_header", $data); ?>
+
+<body class="bg-login">
+	<!--wrapper-->
+	<div class="wrapper">
+		<div class="d-flex align-items-center justify-content-center my-5 my-lg-0">
+			<div class="container">
+				<div class="row row-cols-1 row-cols-lg-2 row-cols-xl-2">
+					<div class="col mx-auto">
+						<div class="card">
+							<div class="card-body">
+								<div class="border p-4 rounded">
+									<div class="text-center">
+										<h3 class="">Sign Up</h3>
+										<p>Already have an account? <a href="<?= URL_ROOT ?>users/login">Log in here</a>
+										</p>
+									</div>
+									<div class="login-separater">
+										<hr />
+									</div>
+									<div class="form-body">
+										<form class="row g-3" action="<?= URL_ROOT ?>users/register" method="post">
+											<div class="col-sm-6">
+												<label for="inputFirstName" class="form-label">First Name</label>
+												<input type="text" name="name" class="form-control<?= !empty($data['errors']['name_err']) ? ' is-invalid' : '' ?>" id="inputFirstName" placeholder="Jhon" value="<?= $data['name'] ?>">
+												<?php if (!empty($data['errors']['name_err'])) : ?>
+													<span class="invalid-feedback"><?= $data['errors']['name_err'] ?></span>
+												<?php endif ?>
+											</div>
+											<div class="col-sm-6">
+												<label for="inputLastName" class="form-label">Last Name</label>
+												<input type="text" name="lastname" class="form-control<?= !empty($data['errors']['lastname_err']) ? ' is-invalid' : '' ?>" id="inputLastName" placeholder="Deo" value="<?= $data['lastname'] ?>">
+												<?php if (!empty($data['errors']['lastname_err'])) : ?>
+													<span class="invalid-feedback"><?= $data['errors']['lastname_err'] ?></span>
+												<?php endif ?>
+											</div>
+											<div class="col-12">
+												<label for="inputEmailAddress" class="form-label">Email Address</label>
+												<input type="email" name="email" class="form-control<?= !empty($data['errors']['email_err']) ? ' is-invalid' : '' ?>" id="inputEmailAddress" placeholder="example@user.com" value="<?= $data['email'] ?>">
+												<?php if (!empty($data['errors']['email_err'])) : ?>
+													<span class="invalid-feedback"><?= $data['errors']['email_err'] ?></span>
+												<?php endif ?>
+											</div>
+											<div class="col-12">
+												<label for="inputChoosePassword" class="form-label">Password</label>
+												<div class="input-group">
+													<input id="inputChoosePassword" type="password" class="form-control<?= !empty($data['errors']['password_err']) ? ' is-invalid' : '' ?>" name="password" placeholder="Enter Password" value="<?= $data['password'] ?>">
+													<a href="javascript:;" class="input-group-text bg-transparent">
+														<i toggle="#inputChoosePassword" class='bx bx-hide toggle-password'></i>
+													</a>
+													<?php if (!empty($data['errors']['password_err'])) : ?>
+														<span class="invalid-feedback"><?= $data['errors']['password_err'] ?></span>
+													<?php endif ?>
+												</div>
+											</div>
+											<div class="col-12">
+												<label for="inputConfirmPassword" class="form-label">Confirm Password</label>
+												<div class="input-group">
+													<input id="inputConfirmPassword" type="password" class="form-control<?= !empty($data['errors']['confirm_password_err']) ? ' is-invalid' : '' ?>" name="confirm_password" placeholder="Confirm Password" value="<?= $data['confirm_password'] ?>">
+													<a href="javascript:;" class="input-group-text bg-transparent">
+														<i toggle="#inputConfirmPassword" class='bx bx-hide toggle-password'></i>
+													</a>
+													<?php if (!empty($data['errors']['confirm_password_err'])) : ?>
+														<span class="invalid-feedback"><?= $data['errors']['confirm_password_err'] ?></span>
+													<?php endif ?>
+												</div>
+											</div>
+											<div class="col-12">
+												<div class="form-check form-switch">
+													<input name="term_and_cond" class="form-check-input<?= isset($data['errors']['term_and_cond_err']) ? ' is-invalid toggle-ter-and-cond' : '' ?>" type="checkbox" id="flexSwitchCheckChecked" <?= $data['term_and_cond'] == 'off' ? '' : 'checked' ?>>
+													<label class="form-check-label" for="flexSwitchCheckChecked">I read and agree to Terms & Conditions</label>
+													<?php if (isset($data['errors']['term_and_cond_err'])) : ?>
+														<span class="invalid-feedback"><?= $data['errors']['term_and_cond_err'] ?></span>
+													<?php endif ?>
+												</div>
+											</div>
+											<div class="col-12">
+												<div class="d-grid">
+													<input type="hidden" name="token" value="<?= isset($_SESSION['token']) ? $_SESSION['token'] : '' ?>" />
+													<button type="submit" class="btn btn-primary"><i class='bx bx-user'></i>Sign up</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--end row-->
+			</div>
+		</div>
+	</div>
+	<!--end wrapper-->
+	<!-- Bootstrap JS -->
+	<script src="<?= ASSETS ?>js/bootstrap.bundle.min.js"></script>
+	<!--plugins-->
+	<script src="<?= ASSETS ?>js/jquery.min.js"></script>
+	<script src="<?= ASSETS ?>plugins/simplebar/js/simplebar.min.js"></script>
+	<script src="<?= ASSETS ?>plugins/metismenu/js/metisMenu.min.js"></script>
+	<script src="<?= ASSETS ?>plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+	<!--Password show & hide js -->
+	<script>
+		$(document).ready(function() {
+			$(".toggle-password").click(function() {
+				$(this).toggleClass("bx-show bx-hide");
+				var input = $($(this).attr("toggle"));
+				if (input.attr("type") == "password") {
+					input.attr("type", "text");
+				} else {
+					input.attr("type", "password");
+				}
+			});
+
+			$(".toggle-ter-and-cond").click(function() {
+				$(this).toggleClass("valid is-invalid");
+			});
+		});
+	</script>
+	<!--app JS-->
+	<script src="<?= ASSETS ?>js/app.js"></script>
+</body>
+
+</html>

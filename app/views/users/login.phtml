@@ -1,0 +1,113 @@
+<?php $this->loadView("includes/html_header", $data); ?>
+
+<body class="bg-login">
+	<!--wrapper-->
+	<div class="wrapper">
+		<div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
+			<div class="container-fluid">
+				<div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
+					<div class="col mx-auto">
+						<div class="card">
+							<div class="card-body">
+								<div class="border p-4 rounded">
+									<div class="text-center">
+
+										<?php flashMsg('register_success');
+										flashMsg('mail_sent_success'); ?>
+
+										<?php if (isset($data['errors']['user_not_found'])) : ?>
+											<div id="flesh-msg" class="alert alert-danger bg-danger rounded-0 my-3 fade show position-fixed top-0 start-0 end-0">
+												<h6 class="mb-0 text-white">Login error</h6>
+												<div class="text-white">User with given credential not found</div>
+											</div>
+										<?php endif ?>
+
+										<h3 class="">Log in</h3>
+										<p>Don't have an account yet? <a href="<?= URL_ROOT ?>users/register">Sign up here</a>
+										</p>
+									</div>
+									<div class="login-separater">
+										<hr />
+									</div>
+									<div class="form-body">
+										<form class="row g-3" method="post" action="<?= URL_ROOT ?>users/login">
+											<?php if (!empty($data['errors']['user_err'])) : ?>
+												<div class="text-center">
+													<span class="text-danger"><?= $data['errors']['user_err'] ?></span>
+												</div>
+											<?php endif ?>
+											<div class="col-12">
+												<label for="inputEmailAddress" class="form-label">Email Address</label>
+												<input type="email" name="email" class="form-control<?= !empty($data['errors']['email_err']) ? ' is-invalid' : '' ?>" id="inputEmailAddress" placeholder="Enter Email Address" value="<?= $data['email'] ?>">
+												<?php if (!empty($data['errors']['email_err'])) : ?>
+													<span class="invalid-feedback"><?= $data['errors']['email_err'] ?></span>
+												<?php endif ?>
+											</div>
+											<div class="col-12">
+												<label for="inputChoosePassword" class="form-label">Password</label>
+												<div class="input-group">
+													<input type="password" name="password" class="form-control<?= !empty($data['errors']['password_err']) ? ' is-invalid' : '' ?>" id="inputChoosePassword" placeholder="Enter Password" value="<?= $data['password'] ?>">
+													<a href="javascript:;" class="input-group-text bg-transparent">
+														<i toggle="#inputChoosePassword" class='bx bx-hide toggle-password'></i>
+													</a>
+
+													<?php if (!empty($data['errors']['password_err'])) : ?>
+														<span class="invalid-feedback"><?= $data['errors']['password_err'] ?></span>
+													<?php endif ?>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-check form-switch">
+													<input name="remember_me" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" <?= $data['remember_me'] == 'no' ? '' : 'checked' ?>>
+													<label class="form-check-label" for="flexSwitchCheckChecked">Remember Me</label>
+												</div>
+											</div>
+											<div class="col-md-6 text-end"> <a href="<?= URL_ROOT ?>users/forgot_password">Forgot Password ?</a>
+											</div>
+											<div class="col-12">
+												<div class="d-grid">
+													<button type="submit" class="btn btn-primary"><i class="bx bxs-lock-open"></i>Log in</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--end row-->
+			</div>
+		</div>
+	</div>
+	<!--end wrapper-->
+	<!-- Bootstrap JS -->
+	<script src="<?= ASSETS ?>js/bootstrap.bundle.min.js"></script>
+	<!--plugins-->
+	<script src="<?= ASSETS ?>js/jquery.min.js"></script>
+	<!--Password show & hide js -->
+	<script>
+		$(document).ready(function() {
+			$(".toggle-password").click(function() {
+				$(this).toggleClass("bx-show bx-hide");
+				var input = $($(this).attr("toggle"));
+				if (input.attr("type") == "password") {
+					input.attr("type", "text");
+				} else {
+					input.attr("type", "password");
+				}
+			});
+
+			// remove flesh message after 3 s
+			setTimeout(function() {
+				$("#flesh-msg").fadeOut(500, function() {
+					$(this).remove();
+				});
+			}, 5000);
+
+			localStorage.clear();
+		});
+	</script>
+</body>
+
+</html>
